@@ -1,30 +1,15 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="myApp">
 <head>
-    <title>aspes</title>
-    <script src="https://code.angularjs.org/1.2.16/angular.js"></script>
+    <title>aspes</title>  
 </head>
 
 <body>
     <h1>Hello, Aspes's Blog!</h1>
+    <ng-view />
 
-    <div ng-controller="myCon">
-    name:
-    <br />
-    <input type="text" ng-model="name" />
-    <ul>
-      <li ng-repeat="p in people | filter:name | orderBy:'city'">{{p.name}} - {{p.city}}</li>
-    </ul>
-    <script>
-    function myCon($scope) {
-      $scope.people = [
-      	{name: "John", city: "New York"},
-      	{name: "Tom", city: "Atlanta"},
-      	{name: "Kelly", city: "Seattle"},
-      	{name: "Ann", city: "Phoenix"}
-      ]
-    }
-    </script>
-    </div>
+    <script src="https://code.angularjs.org/1.2.16/angular.js"></script>
+    <script src="https://code.angularjs.org/1.2.16/angular-route.js"></script>
+    <script src="/app.js"></script>
 </body>
 </html>
