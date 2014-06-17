@@ -6,3 +6,27 @@
     <ul>
       <li ng-repeat="p in people | filter:name | orderBy:'city'">{{p.name}} - {{p.city}}</li>
     </ul>
+
+
+<div id="home" class="row">
+  <div class="large-6 large-offset-3">
+    <h2>Welcome to the {{ title }} page!</h2>
+
+    <div class="alert-box">{{ message }}</div>
+
+    <ul class="small-block-grid-2">
+      <li>
+        <img class="th" src="/img/acat.jpeg" shows-message-when-hovered message="This is a cat.">
+      </li>
+      <li>
+        <img class="th" src="/img/adog.jpeg" shows-message-when-hovered message="This is a dog.">
+      </li>
+    </ul>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <button class="button large expand radius" ng-click="logout()">Log Out</button>
+      </div>
+    </div>
+  </div>
+</div>

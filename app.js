@@ -24,6 +24,14 @@ app.config(function ($routeProvider) {
                 controller: 'aboutController',
                 templateUrl: '/partials/about.html'
             })
+
+
+  .when('/login', {
+    templateUrl: '/partials/login.html',
+    controller: 'LoginController'
+  })
+
+
         .otherwise({ redirectTo: '/' });
 
 });
@@ -45,6 +53,21 @@ app.service('myService', function() {
         ];   
 });
 
+app.factory("AuthenticationService", function($location) {
+  return {
+    login: function(credentials) {
+      if (credentials.username !== "aaa" || credentials.password !== "ddd") {
+        alert("Username must be 'aaa', password must be 'ddd'");
+      } else {
+        $location.path('/people');
+      }
+    },
+    logout: function() {
+      $location.path('/login');
+    }
+  };
+});
+
 app.controller('homeController', function($scope) {
     $scope.message = "welcome to home page!";
 });
@@ -59,12 +82,42 @@ app.controller('peopleController', function($scope, $routeParams, myService) {
     }
 });
 
-app.controller('peopleAllController', function($scope, myService) {
+app.controller('peopleAllController', function($scope, myService, AuthenticationService) {
     $scope.message = "welcome to people page!";
     $scope.people = myService.getPeople();
+    $scope.logout = function() {
+        AuthenticationService.logout();
+    };
 });
 
 app.controller('aboutController', function($scope) {
     $scope.message = "welcome to about page!";
 });
+
+app.controller("LoginController", function($scope, $location, AuthenticationService) {
+  $scope.credentials = { username: "", password: "" };
+
+  $scope.login = function() {
+    AuthenticationService.login($scope.credentials);
+  }
+});
+
+
+app.directive("showsMessageWhenHovered", function() {
+  return {
+    restrict: "A", // A = Attribute, C = CSS Class, E = HTML Element, M = HTML Comment
+    link: function(scope, element, attributes) {
+      var originalMessage = scope.message;
+      element.bind("mouseenter", function() {
+        scope.message = attributes.message;
+        scope.$apply();
+      });
+      element.bind("mouseleave", function() {
+        scope.message = originalMessage;
+        scope.$apply();
+      });
+    }
+  };
+});
+
 
