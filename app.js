@@ -95,6 +95,7 @@ app.controller('aboutController', function($scope) {
 });
 
 app.controller("LoginController", function($scope, $location, AuthenticationService) {
+  $scope.message = "welcome to login page!";
   $scope.credentials = { username: "", password: "" };
 
   $scope.login = function() {
