@@ -3,7 +3,7 @@ var app = angular.module('myApp', ['ngRoute']);
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/',
+        .when('/home',
             {
                 controller: 'homeController',
                 templateUrl: '/partials/home.html'
@@ -32,7 +32,7 @@ app.config(function ($routeProvider) {
   })
 
 
-        .otherwise({ redirectTo: '/' });
+        .otherwise({ redirectTo: '/home' });
 
 });
 
@@ -102,6 +102,15 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
   }
 });
 
+app.controller('NavbarController', function ($scope, $location) {
+    $scope.getClass = function (path) {
+        if ($location.path().substr(0, path.length) == path) {
+            return true
+        } else {
+            return false;
+        }
+    }
+});
 
 app.directive("showsMessageWhenHovered", function() {
   return {
